@@ -1,0 +1,28 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:ListUsers",
+                "iam:ListRoles"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:ListUserTags",
+                "iam:ListRoleTags",
+                "iam:TagUser",
+                "iam:TagRole",
+                "iam:UntagUser",
+                "iam:UntagRole"
+            ],
+            "Resource": [
+                "arn:aws:iam:: <ACCOUNT-ID>:user/John",
+                "arn:aws:iam:: <ACCOUNT-ID>:role/*"
+            ]
+        }
+    ]
+}
