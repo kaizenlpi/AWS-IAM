@@ -1,0 +1,81 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Deny",
+            "Action": 
+            [
+             "iam:GetAccountSummary",
+             "iam:GetAccountPasswordPolicy",
+             "iam:DeleteAccountPasswordPolicy",
+             "iam:UpdateAccountPasswordPolicy",
+             "iam:ChangePassword",
+             "iam:GetAccountSummary",
+             "iam:GenerateCredentialReport",
+             "iam:ListUsers",
+             "iam:CreateUser"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:CreateTags",
+                "ec2:DeleteTags",
+                "ec2:Describe*",
+                "cloudwatch:Describe*",
+                "ec2:GetConsole*",
+                "iam:ListRolePolicies",
+                "iam:ListRoles",
+                "iam:ListInstanceProfiles",
+                "s3:*",
+                "ec2:CreateKeyPair",
+                "ec2:DeleteKeyPair",
+                "ec2:DescribeKeyPairs",
+                "ec2:ImportKeyPair"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "ForAnyValue:StringLike": {
+                    "aws:RequestedRegion": [
+                        "us-east-1",
+                        "us-east-2",
+                        "us-west-1",
+                        "us-west-2"
+                    ]
+                }
+            }
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:RunInstances",
+                "ec2:TerminateInstances",
+                "ec2:StartInstances",
+                "ec2:StopInstances"
+            ],
+            "Resource": [
+                "arn:aws:ec2:*:*:subnet/subnet-084b91267430e7997",
+                "arn:aws:ec2:*:*:subnet/subnet-0e65a0a64d1ad82ee",
+                "arn:aws:ec2:*:*:subnet/subnet-0065fd6bc033cd56c",
+                "arn:aws:ec2:*:*:subnet/subnet-037a112ef37a8244b",
+                "arn:aws:ec2:*:*:network-interface/*",
+                "arn:aws:ec2:*:*:instance/*",
+                "arn:aws:ec2:*:*:volume/*",
+                "arn:aws:ec2:*::image/ami-*",
+                "arn:aws:ec2:*:*:key-pair/*",
+                "arn:aws:ec2:*:*:security-group/*"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "ec2:Region": [
+                        "us-east-1",
+                        "us-east-2",
+                        "us-west-1",
+                        "us-west-2"
+                    ]
+                }
+            }
+        }
+    ]
+}
