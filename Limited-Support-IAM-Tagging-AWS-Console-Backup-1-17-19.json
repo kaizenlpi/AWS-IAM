@@ -1,0 +1,44 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:ListUsers",
+                "iam:ListRoles"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:ListUserTags",
+                "iam:ListRoleTags",
+                "iam:TagUser",
+                "iam:TagRole",
+                "iam:UntagUser",
+                "iam:UntagRole",
+                "ec2:DeleteTags"
+            ],
+            "Resource": [
+                "arn:aws:iam::142968526119:user/*",
+                "arn:aws:iam::142968526119:role/*"
+            ]
+        },
+        {
+            "Effect": "Deny",
+            "Action": "ec2:DeleteTags",
+            "Resource": "arn:aws:ec2:*:*:instance/*",
+            "Condition": {
+                "StringEquals": {
+                    "ec2:ResourceTag/DCS-DIR": "Limited-Support"
+                },
+                "ForAllValues:StringEquals": {
+                    "aws:TagKeys": [
+                        "DCS-DIR"
+                    ]
+                }
+            }
+        }
+    ]
+}
